@@ -1,0 +1,28 @@
+article {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: gray;
+}
+
+article p {
+    padding: 25px;
+}
+
+article .proveedores {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    padding: 25px;
+}
+
+article .proveedores img {
+    width: 300px;
+    border: 5px solid black;
+    border-radius: 999px;
+    transition: 0.3s all;
+}
+
+article .proveedores img:hover {
+    box-shadow: 5px 5px 10px rgba(0,0,0, 0.8);
+}

@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>{% block title %} Inventario Django {% endblock %}</title>
+    <link rel="stylesheet" href='{% static "core/styles/index.css" %}'>
+    {% block extra_styles %}{% endblock %}
+
+</head>
+<body>
+    <header>
+        <h1>{{encabezado_1}}</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href='{% url "index" %}'>Inicio</a></li>
+            <li><a href='{% url "agregar_productos" %}'>Agregar Productos</a></li>
+            <li><a href='{% url "acerca_de" %}'>Acerca de</a></li>
+            <li><a href='{% url "landing" %}'>Landing Page</a></li>
+        </ul>
+    </nav>
+    <main>
+        {% block content %}
+
+        <p>Inventario "Bianca"</p>
+
+        <article>
+            <div>
+                {% if productos %}
+                     {% for nombre, precio, cantidad, fecha_ingreso in productos %}
+                     <div class="producto">
+                        <p><b>Nombre:</b> {{nombre}}</p>
+                        <p><b>Precio:</b> {{precio}}</p>
+                        <p><b>Cantidad:</b> {{cantidad}}</p>
+                        <p><b>Fecha de Ingreso:</b> {{fecha_igreso}}</p>
+                    </div>
+                       
+                    {% endfor %}
+                {% else %}
+                    No hay productos aún.
+                {% endif %}
+                </div>
+        </article>
+        {% endblock %}
+    </main>
+    <footer>
+        <p>Todos los derechos reservados. Digit@lers 2022.</p>
+    </footer>
+</body>
+</html>

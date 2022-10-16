@@ -1,0 +1,53 @@
+form {
+    width: 30%;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    background-color: gray;
+
+    margin: 0 auto;
+    padding: 25px;
+}
+
+form p {
+    border-radius: 5px;
+    background-color: rgba(0,0,0, 0.25);
+
+    padding: 15px;
+
+    transition: 0.3s all;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+form p label {
+    flex: 4;
+}
+form p input {
+    flex: 8;
+    height: 25px;
+}
+
+form p:hover {
+    background-color: rgba(0,0,0, 0.75);
+}
+
+form .acciones {
+    padding: 15px;
+    background-color: rgba(0,0,0, 0.75);
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+form .acciones input {
+    height: 45px;
+    margin-left: 15px;
+}
+
+form .acciones input[type="submit"] {
+    background-color: greenyellow;
+    width: 150px;
+}

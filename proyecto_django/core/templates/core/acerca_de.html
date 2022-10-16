@@ -1,0 +1,19 @@
+{% extends "core/index.html" %}
+
+{% load static %}
+
+{% block title%}Acerca de nosotros{% endblock %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href='{% static "core/styles/acerca_de.css" %}'>
+{% endblock %}
+{% block content %}
+    <article>
+        <p>Nuestros Proveedores"</p>
+        <div class="proveedores">
+            <img src='{% static "core/img/logo1.jpg" %}' alt="Proveedor 1">
+            <img src='{% static "core/img/logo2.jpg" %}' alt="Proveedor 2">
+            <img src='{% static "core/img/logo3.png" %}' alt="Proveedor 3">
+        </div>
+    </article>
+{% endblock %}
