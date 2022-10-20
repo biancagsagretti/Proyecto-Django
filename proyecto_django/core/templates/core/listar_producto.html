@@ -10,15 +10,26 @@
 {% block content %}
 <article>
     <h2>Nuestros productos:</h2>
-    <div>
-    {% for producto in productos %}
-    <div class="producto">
-       <p><b>Nombre:</b> {{producto.nombre}}</p>
-       <p><b>Precio:</b> {{producto.precio}}</p>
-       <p><b>Cantidad:</b> {{producto.cantidad}}</p>
-       <p><b>Fecha de Ingreso:</b> {{producto.fecha_ingreso}}</p>
-   </div>
-   {% endfor %}  
-    </div>
-</article>
+    
+        <article>
+            <div>
+                {% if productos %}
+                     {% for producto in productos %}
+                     <div class="producto">
+                        <p><b>Nombre:</b> {{producto.nombre}}</p>
+                        <p><b>Precio:</b> {{producto.precio}}</p>
+                        <p><b>Cantidad:</b> {{producto.cantidad}}</p>
+                        <p><b>Fecha de Ingreso:</b> {{producto.fecha_ingreso}}</p>
+                    </div>
+                       
+                    {% endfor %}
+                Producto Agregado exitosamente!
+                {%else%}
+                    No se ha agregado ningún producto
+                    
+                    
+                {% endif %}
+                </div>
+        </article>
+   
 {% endblock %}

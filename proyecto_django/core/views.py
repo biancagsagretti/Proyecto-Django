@@ -11,7 +11,7 @@ def index(request):
     productos = models.Producto.objects.all()
     contexto = {
         'encabezado_1':"Inventario Django",
-        'productos': productos        
+             
     }
     print(reverse("acerca_de"))
     print(reverse("landing"))
@@ -68,7 +68,7 @@ def agregar_producto(request):
            
             )
             nuevo_producto.save()
-        return HttpResponseRedirect(reverse("index"))
+        return HttpResponseRedirect(reverse("listar_productos"))
 
     else:
         form = forms.AgregarProducto()
@@ -107,6 +107,8 @@ def borrar_producto(request, slug):
     producto.delete()
    
     return redirect('/')  
+    
+
 
 
 
