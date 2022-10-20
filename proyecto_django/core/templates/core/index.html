@@ -21,27 +21,41 @@
             <li><a href='{% url "agregar_productos" %}'>Agregar Productos</a></li>
             <li><a href='{% url "acerca_de" %}'>Acerca de</a></li>
             <li><a href='{% url "landing" %}'>Landing Page</a></li>
+            <li><a href='{% url "borrar_productos" %}'>Borrar Productos</a></li>
+            <li><a href='{% url "listar_productos" %}'>Listar Productos</a></li>
+            <li><a href='{% url "editar_productos" %}'>Editar Productos</a></li>
         </ul>
     </nav>
     <main>
         {% block content %}
+     
+            <div class="inventario">
+           
+                <a href='{% url "listar_productos" %}' >  <img src='{% static "core/img/inventario.jpg" %}' alt="Inventario"></a></div> 
+            </div>
 
-        <p>Inventario "Bianca"</p>
+       
+      
+
+       
 
         <article>
             <div>
-                {% if productos %}
-                     {% for nombre, precio, cantidad, fecha_ingreso in productos %}
+                {% if producto %}
+                     {% for producto in productos %}
                      <div class="producto">
-                        <p><b>Nombre:</b> {{nombre}}</p>
-                        <p><b>Precio:</b> {{precio}}</p>
-                        <p><b>Cantidad:</b> {{cantidad}}</p>
-                        <p><b>Fecha de Ingreso:</b> {{fecha_igreso}}</p>
+                        <p><b>Nombre:</b> {{producto.nombre}}</p>
+                        <p><b>Precio:</b> {{producto.precio}}</p>
+                        <p><b>Cantidad:</b> {{producto.cantidad}}</p>
+                        <p><b>Fecha de Ingreso:</b> {{producto.fecha_ingreso}}</p>
                     </div>
                        
                     {% endfor %}
-                {% else %}
-                    No hay productos aún.
+                Producto Agregado exitosamente!
+                {%else%}
+                    No se ha agregado ningún producto
+                    
+                    
                 {% endif %}
                 </div>
         </article>

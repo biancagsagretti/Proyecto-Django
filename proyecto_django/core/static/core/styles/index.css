@@ -1,19 +1,19 @@
 body {
-    background-color: rgb(201, 146, 201);
+    background-color: rgb(189, 147, 189);
 }
 
 h1, p {
     text-align: center;
-    color: rgb(5, 5, 5);
+    color: rgb(243, 225, 225);
 }
 
 nav {
-    position: sticky;
+    position:static;
     top: 0;
 
     padding: 5px;
 
-    background-color: rgb(226, 12, 173);
+    background-color: rgb(112, 56, 98);
 }
 
 nav ul {
@@ -38,7 +38,7 @@ nav ul li a {
 
     border-radius: 5px;
     
-    background-color: rgba(0,0,0,0.25);
+    background-color: rgb(203, 10, 221);
     color: black;
 
     transition: 0.3s all;
@@ -52,13 +52,23 @@ nav ul li a:hover {
 main {
     padding: 25px;
 }
-
-article {
+.inventario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(235, 17, 216);
     padding: 25px;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: rgb(186, 9, 221);
+    border-radius: 20px;
 }
+
+.inventario img {
+    width: 300px;
+    border-radius: 20px;
+    transition: 0.3s all;
+}
+
+
+
 
 article p {
     color: black;

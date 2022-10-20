@@ -1,0 +1,24 @@
+{% extends "core/index.html" %}
+
+{% load static %}
+
+{% block title%}Listar Productos{% endblock %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href='{% static "core/styles/agregar_producto.css" %}'>
+{% endblock %}
+{% block content %}
+<article>
+    <h2>Nuestros productos:</h2>
+    <div>
+    {% for producto in productos %}
+    <div class="producto">
+       <p><b>Nombre:</b> {{producto.nombre}}</p>
+       <p><b>Precio:</b> {{producto.precio}}</p>
+       <p><b>Cantidad:</b> {{producto.cantidad}}</p>
+       <p><b>Fecha de Ingreso:</b> {{producto.fecha_ingreso}}</p>
+   </div>
+   {% endfor %}  
+    </div>
+</article>
+{% endblock %}

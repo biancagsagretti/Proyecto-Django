@@ -1,0 +1,42 @@
+{% extends "core/index.html" %}
+
+{% load static %}
+
+{% block title%}Editar Productos% endblock %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href='{% static "core/styles/agregar_producto.css" %}'>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Edit</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'editar_productos' producto.slug %}"  method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="nombreInput" name="nombreInput" value="{{producto.nombre}}" class="form-control" placeholder="Nombre"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="precioInput" name="precioInput" value="{{producto.precio}}" class="form-control" placeholder="Precio"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="cantidadInput" name="cantidadInput" value="{{producto.cantidad}}" class="form-control"
+                        placeholder="Cantidad"required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="fecha_ingresoInput" name="fecha_ingresoInput" value="{{producto.fecha_ingreso}}" class="form-control"
+                        placeholder="Fecha_Ingreso"required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

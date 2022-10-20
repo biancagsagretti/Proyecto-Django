@@ -1,19 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from . import forms
+from. import models
+
 
 # Create your views here.
 
 def index(request):
+    productos = models.Producto.objects.all()
     contexto = {
         'encabezado_1':"Inventario Django",
-        
-        'productos': [
-        ("Bananas"),
-        ("Peras")
-]
-
+        'productos': productos        
     }
     print(reverse("acerca_de"))
     print(reverse("landing"))
@@ -33,7 +31,7 @@ def landing_page(request):
     html = """
      <style>
             body {
-                background-color: red;
+                background-color:rgb(201, 146, 201);
             }
 
             h1, p {
@@ -42,10 +40,10 @@ def landing_page(request):
             }
         </style>
         <header>
-            <h1>Landing page del Aula Virtual 1.0</h1>
+            <h1>Landing page del Inventario</h1>
         </header>
         <main>
-            <p>Bienvenid@s al aula virtual Django 1.0</p>
+            <p>Bienvenidos al Inventario Django</p>
         </main>
         <footer>
             <p>Todos los derechos reservados. Digit@lers 2022.</p>
@@ -57,17 +55,62 @@ def landing_page(request):
 def agregar_producto(request):
     if request.method == "POST":
         form = forms.AgregarProducto(request.POST)
-    if form.is_valid():
-        print(form.cleaned_data['nombre'])
-        print(form.cleaned_data['precio'])
-        print(form.cleaned_data['cantidad'])
-        print(form.cleaned_data['fecha_ingreso'])
+        if form.is_valid():
+            print(form.cleaned_data['nombre'])
+            print(form.cleaned_data['precio'])
+            print(form.cleaned_data['cantidad'])
+            print(form.cleaned_data['fecha_ingreso'])
+            nuevo_producto = models.Producto(
+            nombre = form.cleaned_data['nombre'],
+            precio= form.cleaned_data['precio'],
+            cantidad= form.cleaned_data['cantidad'],
+            fecha_ingreso= form.cleaned_data['fecha_ingreso'],
+           
+            )
+            nuevo_producto.save()
         return HttpResponseRedirect(reverse("index"))
 
     else:
         form = forms.AgregarProducto()
     ctx = {
-        "encabezado_1": "Agregar Alumno al sistema",
+        "encabezado_1": "Agregar Producto al sistema",
         "formulario": form
         }
     return render(request, "core/agregar_producto.html", ctx)
+
+def listar_producto (request):
+    productos= models.Producto.objects.all()
+    return render(request, "core/listar_producto.html", {"productos": productos})
+
+def editar_producto(request, slug):
+    producto = models.Producto.objects.get(slug=slug)
+
+    nombre = request.POST.get('nombreInput')
+    precio = request.POST.get('precioInput')
+    cantidad = request.POST.get('cantidadInput')
+    fecha_ingreso = request.POST.get('fecha_ingresoInput')
+    if request.method == 'POST':
+
+        producto.nombre = nombre
+        producto.precio = precio
+        producto.cantidad = cantidad
+        producto.fecha_ingreso = fecha_ingreso
+        producto.save()
+        
+        return redirect('/')
+
+    return render (request, "core/editar_producto.html", {"producto": producto})
+
+def borrar_producto(request, slug):
+    producto = models.Producto.objects.get(slug=slug)
+
+    producto.delete()
+   
+    return redirect('/')  
+
+
+
+
+
+
+        

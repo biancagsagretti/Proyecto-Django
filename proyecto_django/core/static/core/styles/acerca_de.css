@@ -1,11 +1,14 @@
 article {
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: gray;
+    border: 0,5px solid black;
+    border-radius: 3px;
+    background-color: rgb(224, 198, 198);
 }
 
-article p {
+article h2 {
     padding: 25px;
+    color:rgb(10, 10, 10);
+    text-align: center;
+    background-color: rgb(209, 7, 175);
 }
 
 article .proveedores {
@@ -18,11 +21,11 @@ article .proveedores {
 
 article .proveedores img {
     width: 300px;
-    border: 5px solid black;
-    border-radius: 999px;
+    border: 1px solid black;
+    border-radius: 20px;
     transition: 0.3s all;
 }
 
 article .proveedores img:hover {
-    box-shadow: 5px 5px 10px rgba(0,0,0, 0.8);
+    box-shadow: 5px 5px 10px rgba(92, 75, 75, 0.8);
 }
