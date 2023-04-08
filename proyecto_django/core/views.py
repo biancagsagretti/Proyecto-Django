@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from . import forms
 from. import models
+
 
 
 # Create your views here.
@@ -82,34 +83,44 @@ def listar_producto (request):
     productos= models.Producto.objects.all()
     return render(request, "core/listar_producto.html", {"productos": productos})
 
-def editar_producto(request, slug):
-    producto = models.Producto.objects.get(slug=slug)
-
-    nombre = request.POST.get('nombreInput')
-    precio = request.POST.get('precioInput')
-    cantidad = request.POST.get('cantidadInput')
-    fecha_ingreso = request.POST.get('fecha_ingresoInput')
-    if request.method == 'POST':
-
-        producto.nombre = nombre
-        producto.precio = precio
-        producto.cantidad = cantidad
-        producto.fecha_ingreso = fecha_ingreso
-        producto.save()
-        
-        return redirect('/')
-
-    return render (request, "core/editar_producto.html", {"producto": producto})
-
-def borrar_producto(request, slug):
-    producto = models.Producto.objects.get(slug=slug)
-
-    producto.delete()
-   
-    return redirect('/')  
+def editar_producto(request):
+    productos= models.Producto.objects.all()
     
+    if request.method == "POST":
+        form = forms.AgregarProducto(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data['nombre'])
+            print(form.cleaned_data['precio'])
+            print(form.cleaned_data['cantidad'])
+            print(form.cleaned_data['fecha_ingreso'])
+            nuevo_producto = models.Producto(
+            nombre = form.cleaned_data['nombre'],
+            precio= form.cleaned_data['precio'],
+            cantidad= form.cleaned_data['cantidad'],
+            fecha_ingreso= form.cleaned_data['fecha_ingreso'],
+           
+            )
+            nuevo_producto.save()
+        return HttpResponseRedirect(reverse("listar_productos"))
+
+    else:
+        form = forms.AgregarProducto()
+    ctx = {
+        "encabezado_1": "Agregar Producto al sistema",
+        "formulario": form,
+        "productos": productos
+        }
+   
 
 
+    return render (request, "core/editar_producto.html", ctx)
+
+def borrar_producto(request, id):
+        
+
+    productos = get_object_or_404(models.Producto, id =id)
+    productos.delete()
+    return HttpResponseRedirect(reverse("listar_productos"))
 
 
 
